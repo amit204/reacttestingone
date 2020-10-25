@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
+
+
 class HeaderComponent extends Component{
    render(){
     return(
@@ -7,8 +8,8 @@ class HeaderComponent extends Component{
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                        <div className="logo pull-left">
-                        <a href="#"><img src="./../images/logo.png" className="img-responsive"/></a>  
+                        <div className="logo pull-left col-md-3">
+                        <a href="#"><img src={require("../../images/logo.png").default} alt="logo" className="img-fluid"/></a>  
                         </div>  
                     </div>
                     <div className="col-md-6">
