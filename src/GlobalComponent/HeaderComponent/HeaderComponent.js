@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-
+import './HeaderComponent.css';
 
 class HeaderComponent extends Component{
    render(){
     return(
         <div>
+            <div className="header">
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
@@ -14,11 +15,12 @@ class HeaderComponent extends Component{
                     </div>
                     <div className="col-md-6">
                         <div className="cta pull-right">
-                            <a className="cta-btn"></a>
-                            <a href="#" className="pull-right" id="get-quote-cta-big">Get a quote</a>
+                            
+                            <a href="#" className="pull-right quote" >Get a quote</a>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     )
