@@ -1,12 +1,16 @@
 import './App.css';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import HomeComponent from './HomeComponent/HomeComponent';
+import HeaderComponent from './GlobalComponent/HeaderComponent/HeaderComponent';
+import FooterComponent from './GlobalComponent/FooterComponent/FooterComponent';
+import NavComponent from './GlobalComponent/NavComponent/NavComponent'
 function App() {
   return (
-    <div className="App">
-     <HomeComponent />
-    </div>
+    <div>
+      <HeaderComponent />
+   <NavComponent />
+  <FooterComponent />
+  </div>
   );
 }
 
