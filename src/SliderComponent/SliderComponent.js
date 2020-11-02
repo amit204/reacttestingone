@@ -9,10 +9,15 @@ import 'owl.carousel';
 
 
 class SliderComponent extends Component{
+  componentDidMount() {
+    $('.owl-carousel').owlCarousel({
+    // my options
+    });
+    }
 render() {
     return (
         <div>
-    <div class="owl-carousel owl-theme">
+    <div className="owl-carousel owl-theme">
   <div> Your Content </div>
   <div> Your Content </div>
   <div> Your Content </div>
