@@ -11,15 +11,51 @@ class ContactUs extends React.Component {
     this.state = {
         emailaddress: "", 
         password: "", 
+        emailaddressValid: false, 
+        passwordValid: false, 
+        formErrors: {
+          emailaddress: "", 
+          password: ""
+        }, 
       }
+      
   }
   abc = (event) => {
     const name = event.target.name;
     const value = event.target.value;
 
-    this.setState({[name]: value} 
-    )
-  }
+    this.setState({[name]: value})
+    this.validateField(name, value)
+  
+    }
+    validateField(fieldName, fieldValue){
+      let fieldValidationErrors = this.state.formErrors;
+      let emailaddressValid = this.state.emailaddressValid;
+      let passwordValid = this.state.passwordValid;
+      switch(fieldName) {
+        case "emailaddress":
+          emailaddressValid = fieldValue.match(/^\w+@[a-zA-Z]+?\.[a-zA-Z]{2,3}$/);
+          fieldValidationErrors.emailaddress = emailaddressValid ? "" : " is inValid!";
+          break;
+          case "password": 
+          passwordValid = fieldValue.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+          fieldValidationErrors.password = passwordValid ? "" : " is inValid!";
+          break; 
+          default:
+           break;
+      
+    } this.setState({
+      formErrors: fieldValidationErrors, 
+      emailaddressValid: emailaddressValid, 
+      passwordValid: passwordValid
+    });
+    // this.validateForm();
+    }
+    // validateForm() {
+    //   this.setState({
+    //     formValid: this.state.emailaddressValid && this.state.passwordValid
+    //   })
+    // }
   render() {
     return(
       <div className = "container">
@@ -60,19 +96,26 @@ class ContactUs extends React.Component {
                       onChange={this.abc}
                       required 
                       placeholder = "richard@gmail.com" />
+
+                  </td>
+                  <td>
+                 <p>  {this.state.formErrors.emailaddress.length > 0 ? "" : this.state.formErrors.emailaddress}</p>
                   </td>
                 </tr>
                 <tr>
                   <td>Password</td>
                   <td>
                     <input 
-                      type = "text" 
+                      type = "password" 
                       name = "password" 
                       className = "form-control" 
                        value ={this.state.password}
                       required 
                       onChange={this.abc}
                       placeholder = "demo123" />
+                  </td>
+                  <td>
+                  <p>  {this.state.formErrors.password.length > 0 ? "" : this.state.formErrors.password}</p>
                   </td>
                 </tr>
                 <tr>
