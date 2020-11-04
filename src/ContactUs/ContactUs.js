@@ -11,12 +11,17 @@ class ContactUs extends React.Component {
     this.state = {
         emailaddress: "", 
         password: "", 
+        cpytext: "",
+        selectdrop:"",
+        optradio:"",
+        optarrs:""
         emailaddressValid: false, 
         passwordValid: false, 
         formErrors: {
           emailaddress: "", 
           password: ""
         }, 
+        
       }
       
   }
@@ -30,11 +35,11 @@ class ContactUs extends React.Component {
     }
     validateField(fieldName, fieldValue){
       let fieldValidationErrors = this.state.formErrors;
-      let emailaddressValid = this.state.emailaddressValid;
+      let emailaddressValid = this.state.passwordValid;
       let passwordValid = this.state.passwordValid;
       switch(fieldName) {
         case "emailaddress":
-          emailaddressValid = fieldValue.match(/^\w+@[a-zA-Z]+?\.[a-zA-Z]{2,3}$/);
+          emailaddressValid = fieldValue.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
           fieldValidationErrors.emailaddress = emailaddressValid ? "" : " is inValid!";
           break;
           case "password": 
@@ -56,6 +61,17 @@ class ContactUs extends React.Component {
     //     formValid: this.state.emailaddressValid && this.state.passwordValid
     //   })
     // }
+    def = (e) =>{
+      // const name = e.target.name;
+      // const value = e.target.value;
+      emailaddress = this.state.emailaddress;
+      password = this.state.password;
+
+      if(name == emailaddress){
+        
+
+      }
+    }
   render() {
     return(
       <div className = "container">
@@ -99,7 +115,7 @@ class ContactUs extends React.Component {
 
                   </td>
                   <td>
-                 <p>  {this.state.formErrors.emailaddress.length > 0 ? "" : this.state.formErrors.emailaddress}</p>
+                 <p>{this.state.formErrors.emailaddress.length > 0 ? this.state.formErrors.emailaddress :"" }</p>
                   </td>
                 </tr>
                 <tr>
@@ -110,21 +126,81 @@ class ContactUs extends React.Component {
                       name = "password" 
                       className = "form-control" 
                        value ={this.state.password}
-                      required 
                       onChange={this.abc}
                       placeholder = "demo123" />
                   </td>
                   <td>
-                  <p>  {this.state.formErrors.password.length > 0 ? "" : this.state.formErrors.password}</p>
+                  <p>{this.state.formErrors.password.length > 0 ?  this.state.formErrors.password : ""}</p>
                   </td>
+                </tr>
+                <tr>
+                  <td>text</td>
+                  <td>
+                    <input 
+                      type = "text" 
+                      name = "cpytext" 
+                      className = "form-control" 
+                       value ={this.state.password} 
+                      placeholder = "demo123" />
+                  </td>
+                  <td>
+                  <p>{this.state.formErrors.password.length > 0 ?  this.state.formErrors.password : ""}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>select</td>
+                  <td>
+                    <div className="form-check">
+                  <label className="form-check-label">
+                  <input type="checkbox" className="form-check-input" name="optarrs" value="1" />Option 1
+                </label>
+                <label className="form-check-label">
+                  <input type="checkbox" className="form-check-input" name="optarrs" value="2" />Option 1
+                </label>
+                <label className="form-check-label">
+                  <input type="checkbox" className="form-check-input" name="optarrs" value="3" />Option 1
+                </label>
+                </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>select</td>
+                  <td>
+                  <div className="form-check">
+                  <label className="form-check-label">
+                    <input type="radio" className="form-check-input" name="optradio" />Option 1
+                  </label>
+                </div>
+                <div className="form-check">
+                  <label className="form-check-label">
+                    <input type="radio" className="form-check-input" name="optradio" />Option 2
+                  </label>
+                </div>
+                <div className="form-check disabled">
+                  <label className="form-check-label">
+                    <input type="radio" className="form-check-input" name="optradio" />Option 3
+                  </label>
+                </div>
+                  </td>
+                </tr>
+                <tr>
+                <div className="form-group">
+                <label for="sel1">Select list:</label>
+                <select className="form-control" id="sel1" name="selectdrop">
+                  <option value="">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
                 </tr>
                 <tr>
                   <td colSpan = "2">
                     <button 
                       type = "submit" 
                       name = "submit" 
-                      className = "btn btn-primary mr-3" 
-                    >
+                      onClick="def"
+                      className = "btn btn-primary mr-3">
                         submit
                     </button>
                   </td>
