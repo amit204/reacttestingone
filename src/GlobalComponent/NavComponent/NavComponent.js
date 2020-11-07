@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import HomeComponent from '../../HomeComponent/HomeComponent';
 import AboutUs from '../../AboutUs/AboutUs';
 import ContactUs from '../../ContactUs/ContactUs';
-
 import PageNotFound from '../../PageNotFound/PageNotFound';
-
+import FuncationalComponent from '../../FuncationalComponent/FuncationalComponent';
 import {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
 
 class NavComponent extends Component{
@@ -56,7 +55,9 @@ class NavComponent extends Component{
       <li className="nav-item">
       <NavLink activeClassName = "active nav-link" className = "nav-link" to = "/contactus">Contact Us</NavLink>
       </li>
-   
+      <li className="nav-item">
+      <NavLink activeClassName = "active nav-link" className = "nav-link" to = "/funcationalc">Funcational Component</NavLink>
+      </li>
     </ul>
     
   </div>
@@ -65,6 +66,7 @@ class NavComponent extends Component{
               <Route exact path = '/' component = {HomeComponent} />
               <Route path = '/aboutus' component = {AboutUs} />
               <Route path = '/contactus' component = {ContactUs} />
+              <Route path = '/funcationalc' component = {FuncationalComponent} />
               <Route component = {PageNotFound} />
             </Switch>
           </div>

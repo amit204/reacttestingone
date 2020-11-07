@@ -10,7 +10,7 @@ class HeaderComponent extends Component{
                 <div className="row">
                     <div className="col-md-6">
                         <div className="logo pull-left col-md-3">
-                        <a href="#"><img src={require("../../images/logo.png").default} alt="logo" className="img-fluid"/></a>  
+                        <a href="#"><img src={require('../../images/logo.png').default} alt="logo" className="img-fluid"/></a>  
                         </div>  
                     </div>
                     <div className="col-md-6">
