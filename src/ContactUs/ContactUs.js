@@ -11,10 +11,10 @@ class ContactUs extends React.Component {
     this.state = {
         emailaddress: "", 
         password: "", 
-        cpytext: "",
-        selectdrop:"",
-        optradio:"",
-        optarrs:""
+        // cpytext: "",
+        // selectdrop:"",
+        // optradio:""
+        // optarrs:""
         emailaddressValid: false, 
         passwordValid: false, 
         formErrors: {
@@ -61,17 +61,17 @@ class ContactUs extends React.Component {
     //     formValid: this.state.emailaddressValid && this.state.passwordValid
     //   })
     // }
-    def = (e) =>{
-      // const name = e.target.name;
-      // const value = e.target.value;
-      emailaddress = this.state.emailaddress;
-      password = this.state.password;
+    // def = (e) =>{
+    //   // const name = e.target.name;
+    //   // const value = e.target.value;
+    //   emailaddress = this.state.emailaddress;
+    //   password = this.state.password;
 
-      if(name == emailaddress){
+    //   if(name == emailaddress){
         
 
-      }
-    }
+    //   }
+    // }
   render() {
     return(
       <div className = "container">
