@@ -33,14 +33,23 @@ class ContactUs extends React.Component {
     this.validateField(name, value)
   
     }
+    xyz = (e) =>{
+      const email = this.state.emailaddress;
+      const password = this.state.password;
+    }
     validateField(fieldName, fieldValue){
       let fieldValidationErrors = this.state.formErrors;
-      let emailaddressValid = this.state.passwordValid;
+      let emailaddressValid = this.state.emailaddressValid;
       let passwordValid = this.state.passwordValid;
       switch(fieldName) {
         case "emailaddress":
+          if (fieldValue.length > 0){
           emailaddressValid = fieldValue.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
           fieldValidationErrors.emailaddress = emailaddressValid ? "" : " is inValid!";
+        }
+        else{
+          fieldValidationErrors.emailaddress = "email required"
+        }
           break;
           case "password": 
           passwordValid = fieldValue.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
@@ -99,7 +108,7 @@ class ContactUs extends React.Component {
        
         <button type="submit" className="btn btn-primary">Submit</button>
         </form> */}
-          <form name = "fv">
+          <form name = "fv" onSubmit = {this.xyz}>
               <table className = "table">
                 <tr>
                   <td>Email Address</td>
@@ -110,7 +119,7 @@ class ContactUs extends React.Component {
                       className = "form-control" 
                       value = {this.state.emailaddress}
                       onChange={this.abc}
-                      required 
+                       
                       placeholder = "richard@gmail.com" />
 
                   </td>
@@ -133,7 +142,7 @@ class ContactUs extends React.Component {
                   <p>{this.state.formErrors.password.length > 0 ?  this.state.formErrors.password : ""}</p>
                   </td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <td>text</td>
                   <td>
                     <input 
@@ -182,8 +191,8 @@ class ContactUs extends React.Component {
                   </label>
                 </div>
                   </td>
-                </tr>
-                <tr>
+                </tr>*/}
+                {/* <tr> 
                 <div className="form-group">
                 <label for="sel1">Select list:</label>
                 <select className="form-control" id="sel1" name="selectdrop">
@@ -193,7 +202,7 @@ class ContactUs extends React.Component {
                   <option value="4">4</option>
                 </select>
               </div>
-                </tr>
+                </tr> */}
                 <tr>
                   <td colSpan = "2">
                     <button 

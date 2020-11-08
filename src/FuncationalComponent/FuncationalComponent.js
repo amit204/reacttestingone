@@ -1,58 +1,105 @@
-import Form from 'react-validation/build/form';
-import Input from 'react-validation/build/input';
-import React, { Component } from 'react';
-import validator from 'validator';
-const required = (value) => {
-  if (!value.toString().trim().length) {
-    // We can return string or jsx as the 'error' prop for the validated Component
-    return 'require';
-  }
-};
- 
-const email = (value) => {
-  if (!validator.isEmail(value)) {
-    return `${value} is not a valid email.`
-  }
-};
- 
-const lt = (value, props) => {
-  // get the maxLength from component's props
-  if (!value.toString().trim().length > props.maxLength) {
-    // Return jsx
-    return <span className="error">The value exceeded {props.maxLength} symbols.</span>
-  }
-};
- 
-const password = (value, props, components) => {
-  // NOTE: Tricky place. The 'value' argument is always current component's value.
-  // So in case we're 'changing' let's say 'password' component - we'll compare it's value with 'confirm' value.
-  // But if we're changing 'confirm' component - the condition will always be true
-  // If we need to always compare own values - replace 'value' with components.password[0].value and make some magic with error rendering.
-  if (value !== components['confirm'][0].value) { // components['password'][0].value !== components['confirm'][0].value
-    // 'confirm' - name of input
-    // components['confirm'] - array of same-name components because of checkboxes and radios
-    return <span className="error">Passwords are not equal.</span>
-  }
-};
-export default class FuncationalComponent extends Component {
-    render() {
-        return <Form>
-            <h3>Login</h3>
-            <div>
-                <label>
-                    Email*
-                    <Input  name='email' validations={[required, email]}/>
-                </label>
-            </div>
-            <div>
-                <label>
-                    Password*
-                    <Input type='password' name='password' validations={[required, password]}/>
-                </label>
-            </div>
-            <div>
-               <button>submit</button>
-            </div>
-        </Form>;
+import React, {Component} from 'react';
+
+class FuncationalComponent extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      fields: {},
+      errors: {}
     }
+  }
+
+  handleValidation(){
+    let fields = this.state.fields;
+    let errors = {};
+    let formIsValid = true;
+
+    //Name
+    if(!fields["name"]){
+      formIsValid = false;
+      errors["name"] = "Cannot be empty";
+    }
+
+    if(typeof fields["name"] !== "undefined"){
+      if(!fields["name"].match(/^[a-zA-Z]+$/)){
+        formIsValid = false;
+        errors["name"] = "Only letters";
+      }      	
+    }
+
+    //Email
+    if(!fields["email"]){
+      formIsValid = false;
+      errors["email"] = "Cannot be empty";
+    }
+
+    if(typeof fields["email"] !== "undefined"){
+      let lastAtPos = fields["email"].lastIndexOf('@');
+      let lastDotPos = fields["email"].lastIndexOf('.');
+
+      if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') == -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
+        formIsValid = false;
+        errors["email"] = "Email is not valid";
+      }
+    }
+
+
+
+    this.setState({errors: errors});
+    return formIsValid;
+  }
+
+  contactSubmit(e){
+    e.preventDefault();
+    this.handleValidation();
+    // if(this.handleValidation()){
+    //  // alert("Form submitted");
+    // }else{
+    //   //alert("Form has errors.")
+    // }
+
+  }
+
+  handleChange(field, e){    		
+    let fields = this.state.fields;
+    fields[field] = e.target.value;        
+    this.setState({fields});
+  }
+
+  render(){
+    return (
+      <div>        	
+        <form name="contactform" className="contactform" onSubmit= {this.contactSubmit.bind(this)}>
+          <div className="col-md-6">
+            <fieldset>
+              <input ref="name" type="text" size="30" placeholder="Name" onChange={this.handleChange.bind(this, "name")} value={this.state.fields["name"]}/>
+              <span className="error">{this.state.errors["name"]}</span>
+              <br/>
+              <input refs="email" type="text" size="30" placeholder="Email" onChange={this.handleChange.bind(this, "email")} value={this.state.fields["email"]}/>
+              <span className="error">{this.state.errors["email"]}</span>
+              <br/>
+              <input refs="phone" type="text" size="30" placeholder="Phone" onChange={this.handleChange.bind(this, "phone")} value={this.state.fields["phone"]}/>
+              <br/>
+              <input refs="address" type="text" size="30" placeholder="Address" onChange={this.handleChange.bind(this, "address")} value={this.state.fields["address"]}/>
+              <br/>
+            </fieldset>
+          </div>
+          <div className="col-md-6">
+            <fieldset>
+              <textarea refs="message" cols="28" rows="10"
+                className="comments" placeholder="Message" onChange={this.handleChange.bind(this, "message")}>{this.state.fields["message"]}</textarea>
+            </fieldset>
+          </div>
+          <div className="col-md-12">
+            <fieldset>
+              <button className="btn btn-lg pro" id="submit" value="Submit">Send Message</button>
+            </fieldset>
+          </div>
+        </form>
+      </div>
+    )
+  }
 }
+
+export default FuncationalComponent;
