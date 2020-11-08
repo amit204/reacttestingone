@@ -11,15 +11,19 @@ class ContactUs extends React.Component {
     this.state = {
         emailaddress: "", 
         password: "", 
-        // cpytext: "",
-        // selectdrop:"",
-        // optradio:""
-        // optarrs:""
+        cpytext: "",
+        selectdrop:"",
+        optradio:"",
+        optarrs:"",
         emailaddressValid: false, 
         passwordValid: false, 
+        cpytextValid: false,
+        optarrsValid: false,
         formErrors: {
           emailaddress: "", 
-          password: ""
+          password: "",
+          cpytext:"",
+          optarrs:""
         }, 
         
       }
@@ -30,57 +34,51 @@ class ContactUs extends React.Component {
     const value = event.target.value;
 
     this.setState({[name]: value})
-    this.validateField(name, value)
   
     }
     xyz = (e) =>{
+      e.preventDefault();
       const email = this.state.emailaddress;
       const password = this.state.password;
-    }
-    validateField(fieldName, fieldValue){
+      const cpytext = this.state.cpytext;
+      const  optarrs = this.state.optarrs;
       let fieldValidationErrors = this.state.formErrors;
       let emailaddressValid = this.state.emailaddressValid;
       let passwordValid = this.state.passwordValid;
-      switch(fieldName) {
-        case "emailaddress":
-          if (fieldValue.length > 0){
-          emailaddressValid = fieldValue.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-          fieldValidationErrors.emailaddress = emailaddressValid ? "" : " is inValid!";
-        }
-        else{
-          fieldValidationErrors.emailaddress = "email required"
-        }
-          break;
-          case "password": 
-          passwordValid = fieldValue.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
-          fieldValidationErrors.password = passwordValid ? "" : " is inValid!";
-          break; 
-          default:
-           break;
-      
-    } this.setState({
-      formErrors: fieldValidationErrors, 
-      emailaddressValid: emailaddressValid, 
-      passwordValid: passwordValid
-    });
-    // this.validateForm();
+      alert(optarrs);
+      if (email.length > 0){
+        emailaddressValid = email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        fieldValidationErrors.emailaddress = emailaddressValid ? "" : " is inValid!";
+      }
+      else{
+        fieldValidationErrors.emailaddress = "email required"
+      }
+      if (password.length > 0){
+        passwordValid = password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+        fieldValidationErrors.password = passwordValid ? "" : " is inValid!";
+      }
+      else{
+        fieldValidationErrors.password = "password required"
+      }
+      if (cpytext.length > 0){
+       
+      }
+      else{
+        fieldValidationErrors.cpytext = "name required"
+      }
+      if (optarrs.length > 0){
+       
+      }
+      else{
+        fieldValidationErrors.optarrs = "checkbox required"
+      }
+      this.setState({
+        formErrors: fieldValidationErrors, 
+        emailaddressValid: emailaddressValid, 
+        passwordValid: passwordValid
+      });
     }
-    // validateForm() {
-    //   this.setState({
-    //     formValid: this.state.emailaddressValid && this.state.passwordValid
-    //   })
-    // }
-    // def = (e) =>{
-    //   // const name = e.target.name;
-    //   // const value = e.target.value;
-    //   emailaddress = this.state.emailaddress;
-    //   password = this.state.password;
-
-    //   if(name == emailaddress){
-        
-
-    //   }
-    // }
+   
   render() {
     return(
       <div className = "container">
@@ -142,18 +140,18 @@ class ContactUs extends React.Component {
                   <p>{this.state.formErrors.password.length > 0 ?  this.state.formErrors.password : ""}</p>
                   </td>
                 </tr>
-                {/* <tr>
+                <tr>
                   <td>text</td>
                   <td>
                     <input 
                       type = "text" 
                       name = "cpytext" 
                       className = "form-control" 
-                       value ={this.state.password} 
+                      onChange={this.abc}
                       placeholder = "demo123" />
                   </td>
                   <td>
-                  <p>{this.state.formErrors.password.length > 0 ?  this.state.formErrors.password : ""}</p>
+                  <p>{this.state.formErrors.cpytext.length > 0 ?  this.state.formErrors.cpytext : ""}</p>
                   </td>
                 </tr>
                 <tr>
@@ -161,15 +159,18 @@ class ContactUs extends React.Component {
                   <td>
                     <div className="form-check">
                   <label className="form-check-label">
-                  <input type="checkbox" className="form-check-input" name="optarrs" value="1" />Option 1
+                  <input type="checkbox" className="form-check-input" name="optarrs" value="1"  onChange={this.abc}/>Option 1
                 </label>
                 <label className="form-check-label">
-                  <input type="checkbox" className="form-check-input" name="optarrs" value="2" />Option 1
+                  <input type="checkbox" className="form-check-input" name="optarrs" value="2"  onChange={this.abc}/>Option 1
                 </label>
                 <label className="form-check-label">
-                  <input type="checkbox" className="form-check-input" name="optarrs" value="3" />Option 1
+                  <input type="checkbox" className="form-check-input" name="optarrs" value="3"  onChange={this.abc}/>Option 1
                 </label>
                 </div>
+                  </td>
+                  <td>
+                  <p>{this.state.formErrors.optarrs.length > 0 ?  this.state.formErrors.optarrs : ""}</p>
                   </td>
                 </tr>
                 <tr>
@@ -191,8 +192,8 @@ class ContactUs extends React.Component {
                   </label>
                 </div>
                   </td>
-                </tr>*/}
-                {/* <tr> 
+                </tr>
+                <tr> 
                 <div className="form-group">
                 <label for="sel1">Select list:</label>
                 <select className="form-control" id="sel1" name="selectdrop">
@@ -202,7 +203,7 @@ class ContactUs extends React.Component {
                   <option value="4">4</option>
                 </select>
               </div>
-                </tr> */}
+                </tr>
                 <tr>
                   <td colSpan = "2">
                     <button 
