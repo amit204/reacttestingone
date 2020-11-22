@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import './HeaderComponent.css';
+import QuoteComponent from '../QuoteComponent/QuoteComponent';
 
 class HeaderComponent extends Component{
    render(){
+      
     return(
         <div>
             <div className="header">
@@ -15,8 +17,8 @@ class HeaderComponent extends Component{
                     </div>
                     <div className="col-md-6">
                         <div className="cta pull-right">
-                            
-                            <a href="#" className="pull-right quote" >Get a quote</a>
+                          <QuoteComponent />
+
                         </div>
                     </div>
                 </div>
